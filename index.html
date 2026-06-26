@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>zy — aronnihc</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0D1117;
+      --surface:   #161B22;
+      --border:    #21262D;
+      --text:      #E6EDF3;
+      --muted:     #8B949E;
+      --amber:     #F0A500;
+      --amber-dim: #7A5200;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      line-height: 1.7;
+      min-height: 100vh;
+      padding: 48px 24px;
+    }
+
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    /* ── HERO ── */
+    .hero { margin-bottom: 56px; }
+
+    .greeting {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      color: var(--amber);
+      letter-spacing: 0.08em;
+      margin-bottom: 16px;
+    }
+    .greeting::before { content: '> '; opacity: 0.5; }
+
+    .name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(36px, 7vw, 56px);
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.1;
+      margin-bottom: 8px;
+      letter-spacing: -0.02em;
+    }
+    .name span { color: var(--amber); }
+
+    .alias {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+    .alias span { color: var(--amber); }
+
+    .tagline {
+      font-size: 16px;
+      color: var(--muted);
+      max-width: 520px;
+      line-height: 1.8;
+    }
+
+    /* ── STATUS ── */
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--amber);
+      padding: 10px 16px;
+      border-radius: 4px;
+      margin-top: 28px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--amber);
+      animation: pulse 2s ease-in-out infinite;
+      flex-shrink: 0;
+    }
+    .status strong { color: var(--text); }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 48px 0;
+    }
+
+    /* ── SECTION LABEL ── */
+    .section-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 20px;
+    }
+
+    /* ── ABOUT ── */
+    .about p {
+      color: var(--muted);
+      margin-bottom: 14px;
+      font-size: 15px;
+    }
+    .about p strong { color: var(--text); font-weight: 500; }
+
+    .traits {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 28px;
+    }
+    .trait {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 13px;
+      color: var(--muted);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* ── STACK TABLE ── */
+    .stack-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    .stack-table tr {
+      border-bottom: 1px solid var(--border);
+    }
+    .stack-table tr:last-child { border-bottom: none; }
+    .stack-table td {
+      padding: 12px 8px;
+      vertical-align: top;
+    }
+    .stack-table td:first-child {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--amber);
+      white-space: nowrap;
+      width: 140px;
+      padding-right: 24px;
+    }
+    .stack-table td:last-child {
+      color: var(--muted);
+    }
+
+    /* ── QUOTE ── */
+    .quote {
+      border-left: 3px solid var(--amber);
+      padding: 14px 20px;
+      margin-top: 24px;
+      background: var(--surface);
+      border-radius: 0 4px 4px 0;
+      font-size: 13px;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    /* ── PHILOSOPHY ── */
+    .philosophy {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--amber);
+      padding: 24px;
+      border-radius: 4px;
+    }
+    .philosophy p {
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.8;
+    }
+    .philosophy p + p { margin-top: 12px; }
+
+    /* ── FRAILYARD ── */
+    .frailyard {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 20px 24px;
+      border-radius: 6px;
+    }
+    .frailyard-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 600;
+      font-size: 15px;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+    .frailyard p {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+    .frailyard .quote {
+      margin-top: 16px;
+      font-size: 13px;
+    }
+
+    /* ── FIND ME ── */
+    .find-me {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .find-me a {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      color: var(--muted);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: color 0.2s;
+    }
+    .find-me a:hover { color: var(--amber); }
+
+    /* ── FOOTER ── */
+    .footer {
+      margin-top: 64px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .footer-text {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .footer-text span { color: var(--amber); }
+
+    /* ── CURSOR ── */
+    .cursor {
+      display: inline-block;
+      width: 2px;
+      height: 1em;
+      background: var(--amber);
+      margin-left: 2px;
+      vertical-align: middle;
+      animation: blink 1s step-end infinite;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    @media (max-width: 480px) {
+      .stack-table td:first-child { width: 110px; }
+      .footer { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- HERO -->
+    <div class="hero">
+      <div class="greeting">hello, world</div>
+      <h1 class="name">aronnihc<span>.</span></h1>
+      <div class="alias">you can call me <span>zy</span></div>
+      <p class="tagline">
+        I'm a freelance full stack developer, mainly building small to medium size tools and apps to support people around me.
+      </p>
+      <div class="status">
+        <div class="status-dot"></div>
+        Currently building &nbsp;<strong>a billing system in C# + Blazor Server + SQLite</strong><span class="cursor"></span>
+      </div>
+    </div>
+
+    <hr class="divider"/>
+
+    <!-- ABOUT -->
+    <div class="about" style="margin-bottom: 48px;">
+      <div class="section-label">// about</div>
+      <p>
+        I don't learn linearly. I start at arrays and somehow end up at the history of PyTorch and
+        why <code style="color:var(--amber);font-size:13px;">null</code> is a billion dollar mistake. Then I find my way back.
+      </p>
+      <p>
+        Often regarded as someone who can downsize complicated technical issues to something that even a 6 year old could understand.
+      </p>
+      <p>
+        <em style="color:var(--text);">explore the edges first, find the foundation later.</em>
+      </p>
+
+      <div class="traits">
+        <div class="trait">self-directed</div>
+        <div class="trait">asks why first</div>
+        <div class="trait">real problems only</div>
+        <div class="trait">explores edges</div>
+        <div class="trait">Malaysia 🇲🇾</div>
+      </div>
+    </div>
+
+    <hr class="divider"/>
+
+    <!-- STACK -->
+    <div style="margin-bottom: 48px;">
+      <div class="section-label">// stack</div>
+      <table class="stack-table">
+        <tr><td>Language</td><td>C# / .NET 10 / Python / TypeScript / JavaScript</td></tr>
+        <tr><td>Runtime</td><td>Node.js / PHP</td></tr>
+        <tr><td>Framework</td><td>ASP.NET Core / Blazor Server / React</td></tr>
+        <tr><td>Frontend</td><td>HTML / SCSS</td></tr>
+        <tr><td>UI</td><td>Webflow</td></tr>
+        <tr><td>Data</td><td>SQL + Entity Framework Core / Firebase + Auth / Supabase</td></tr>
+        <tr><td>Editor</td><td>99% VSCode</td></tr>
+        <tr><td>Design</td><td>.ps / .ai / .ae</td></tr>
+        <tr><td>Software</td><td>Unreal Engine / Godot / Blender / Maya</td></tr>
+        <tr><td>Assist</td><td>Claude / Copilot</td></tr>
+        <tr><td>Fields</td><td>Visual Communication / Creative Tech / Automation & Machine Learning</td></tr>
+        <tr><td>Version control</td><td>Git</td></tr>
+      </table>
+      <div class="quote">
+        I'm that guy who understands UI disaster logic before Tech Stack vs UI Design starts World War IV.
+      </div>
+    </div>
+
+    <hr class="divider"/>
+
+    <!-- HOW I THINK -->
+    <div style="margin-bottom: 48px;">
+      <div class="section-label">// how i think</div>
+      <div class="philosophy">
+        <p>
+          Most people learn bricks before buildings. I need to see the skyline first —
+          even a blurry one — before the individual bricks make sense to me.
+        </p>
+        <p>
+          Every failed project taught me something I couldn't have learned by finishing it.
+          The folder stays.
+        </p>
+      </div>
+    </div>
+
+    <hr class="divider"/>
+
+    <!-- FRAILYARD -->
+    <div style="margin-bottom: 48px;">
+      <div class="section-label">// the frailyard</div>
+      <div class="frailyard">
+        <div class="frailyard-title">🪦 the frailyard</div>
+        <p>
+          I keep a folder of failed projects and unshipped builds, I call it the frailyard.
+          Not deleted. Not forgotten. Each one reminds me to keep my ego at base.
+        </p>
+        <div class="quote">
+          Failed projects taught me things I couldn't have learned by finishing them.
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider"/>
+
+    <!-- ABOUT THE NAME -->
+    <div style="margin-bottom: 48px;">
+      <div class="section-label">// about the name</div>
+      <p style="color:var(--muted); font-size:14px;">
+        Yes, <code style="color:var(--amber);">aron</code> started as a typo. Now part of my lore, embracing it.
+      </p>
+    </div>
+
+    <hr class="divider"/>
+
+    <!-- FIND ME -->
+    <div style="margin-bottom: 48px;">
+      <div class="section-label">// find me</div>
+      <div class="find-me">
+        <a href="#">🇲🇾 &nbsp;Malaysia</a>
+        <a href="mailto:capricomedia.my@gmail.com">📧 &nbsp;capricomedia.my@gmail.com</a>
+        <a href="https://github.com/aronnihc">⌥ &nbsp;github.com/aronnihc</a>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+      <div class="footer-text">Caprico Multimedia & Deisng · Malaysia</div>
+      <div class="footer-text"><span>// still compiling</span></div>
+    </div>
+
+  </div>
+</body>
+</html>
